@@ -44,16 +44,27 @@ extends CharacterBody3D
 ## Name of Input Action to toggle freefly mode.
 @export var input_freefly : String = "freefly"
 @export var max_jumps : int = 2
+@export var dash_speed : float = 20.0
+@export var dash_duration : float = 0.2
+@export var dash_cooldown : float = 0.5
+@export var input_dash : String = "dash"
 
 var mouse_captured : bool = false
 var look_rotation : Vector2
 var move_speed : float = 0.0
 var freeflying : bool = false
 var jump_count : int = 0
+var is_dashing : bool = false
+var dash_timer : float = 0.0
+var dash_cooldown_timer : float = 0.0
+var dash_direction : Vector3 = Vector3.ZERO
+
 
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
 @onready var collider: CollisionShape3D = $Collider
+@onready var camera: Camera3D = $Head/Camera3D
+
 
 func _ready() -> void:
 	check_input_mappings()
@@ -122,6 +133,31 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 		velocity.y = 0
 	
+	# Dash cooldown timer
+	if dash_cooldown_timer > 0:
+		dash_cooldown_timer -= delta
+
+	# Dash start
+	if Input.is_action_just_pressed(input_dash) and dash_cooldown_timer <= 0 and not is_dashing:
+		is_dashing = true
+		dash_timer = dash_duration
+		dash_cooldown_timer = dash_cooldown
+
+		# Capture full 3D look direction at start of dash
+		dash_direction = -camera.global_transform.basis.z.normalized()
+
+	# Dash movement (locked direction)
+	if is_dashing:
+		dash_timer -= delta
+		velocity = dash_direction * dash_speed
+
+		if dash_timer <= 0:
+			is_dashing = false
+			velocity = Vector3.ZERO  # Clean stop after dash
+
+
+
+
 	# Use velocity to actually move
 	move_and_slide()
 
