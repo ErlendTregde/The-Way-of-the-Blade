@@ -43,11 +43,13 @@ extends CharacterBody3D
 @export var input_sprint : String = "sprint"
 ## Name of Input Action to toggle freefly mode.
 @export var input_freefly : String = "freefly"
+@export var max_jumps : int = 2
 
 var mouse_captured : bool = false
 var look_rotation : Vector2
 var move_speed : float = 0.0
 var freeflying : bool = false
+var jump_count : int = 0
 
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
@@ -87,13 +89,18 @@ func _physics_process(delta: float) -> void:
 	
 	# Apply gravity to velocity
 	if has_gravity:
-		if not is_on_floor():
+		if is_on_floor():
+			jump_count = 0  # <-- Reset jump count here
+		else:
 			velocity += get_gravity() * delta
+
 
 	# Apply jumping
 	if can_jump:
-		if Input.is_action_just_pressed(input_jump) and is_on_floor():
+		if Input.is_action_just_pressed(input_jump) and jump_count < max_jumps:
 			velocity.y = jump_velocity
+			jump_count += 1
+
 
 	# Modify speed based on sprinting
 	if can_sprint and Input.is_action_pressed(input_sprint):
