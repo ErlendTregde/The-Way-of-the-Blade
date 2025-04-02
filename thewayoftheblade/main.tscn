@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcns1k3qljfiy"]
+[gd_scene load_steps=7 format=3 uid="uid://dcns1k3qljfiy"]
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_1dps7"]
+[ext_resource type="Texture2D" uid="uid://bidtlmptlleic" path="res://assets/images/dashLogo.png" id="2_23t51"]
+[ext_resource type="PackedScene" uid="uid://cwafujenjcu6f" path="res://enemy.tscn" id="3_0luuv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qnas0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -36,9 +38,43 @@ input_right = "move_right"
 input_forward = "move_up"
 input_back = "move_down"
 input_jump = "jump"
-dash_duration = 0.4
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0437, 1.62024, 2.72799)
 use_collision = true
 size = Vector3(3.0874, 2.67554, 2.13623)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="DashIcon" type="TextureRect" parent="UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -200.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_23t51")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UI/DashIcon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 70
+
+[node name="Enemy" parent="." instance=ExtResource("3_0luuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16178, 1.59827, -19.9797)

@@ -58,18 +58,27 @@ var is_dashing : bool = false
 var dash_timer : float = 0.0
 var dash_cooldown_timer : float = 0.0
 var dash_direction : Vector3 = Vector3.ZERO
+var dash_icon: TextureRect
+var dash_label: Label
+
 
 
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
 @onready var collider: CollisionShape3D = $Collider
 @onready var camera: Camera3D = $Head/Camera3D
+@onready var sword_anim: AnimationPlayer = $Head/Camera3D/Sword/AnimationPlayer
+
 
 
 func _ready() -> void:
 	check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
+	dash_icon = get_node("../UI/DashIcon")
+	dash_label = get_node("../UI/DashIcon/Label")  # Make sure you have a Label inside DashIcon
+	dash_label.visible = false
+	dash_icon.modulate.a = 1.0
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Mouse capturing
@@ -77,6 +86,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		capture_mouse()
 	if Input.is_key_pressed(KEY_ESCAPE):
 		release_mouse()
+	
+	if not is_dashing and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		sword_anim.play("slash")
+
 	
 	# Look around
 	if mouse_captured and event is InputEventMouseMotion:
@@ -136,12 +149,20 @@ func _physics_process(delta: float) -> void:
 	# Dash cooldown timer
 	if dash_cooldown_timer > 0:
 		dash_cooldown_timer -= delta
+		dash_icon.modulate.a = 0.4
+		dash_label.visible = true
+		dash_label.text = str(ceil(dash_cooldown_timer))
+	else:
+		dash_icon.modulate.a = 1.0
+		dash_label.visible = false
+
 
 	# Dash start
 	if Input.is_action_just_pressed(input_dash) and dash_cooldown_timer <= 0 and not is_dashing:
 		is_dashing = true
 		dash_timer = dash_duration
 		dash_cooldown_timer = dash_cooldown
+		$Head/Camera3D/Sword.slash()
 
 		# Capture full 3D look direction at start of dash
 		dash_direction = -camera.global_transform.basis.z.normalized()
