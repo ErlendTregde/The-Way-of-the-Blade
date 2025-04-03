@@ -79,6 +79,7 @@ func _ready() -> void:
 	dash_label = get_node("../UI/DashIcon/Label")  # Make sure you have a Label inside DashIcon
 	dash_label.visible = false
 	dash_icon.modulate.a = 1.0
+	add_to_group("players")
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Mouse capturing
@@ -89,6 +90,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if not is_dashing and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		sword_anim.play("slash")
+		$Head/Camera3D/Sword.slash()
+
 
 	
 	# Look around
@@ -214,6 +217,10 @@ func capture_mouse():
 func release_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	mouse_captured = false
+
+func on_enemy_killed() -> void:
+	print("Enemy killed. Resetting dash.")
+	dash_cooldown_timer = 0.0
 
 
 ## Checks if some Input Actions haven't been created.

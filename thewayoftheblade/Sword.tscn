@@ -65,7 +65,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xdhrf"]
-size = Vector3(49.6271, 243.328, 17.126)
+size = Vector3(102.328, 305.598, 70.1585)
 
 [node name="Sketchfab_Scene" instance=ExtResource("1_o73cy")]
 transform = Transform3D(0.00281908, 0.00102606, 0, -0.00102606, 0.00281908, 0, 0, 0, 0.003, 0.3, -0.2, 0)
@@ -77,7 +77,8 @@ libraries = {
 }
 
 [node name="HitBox" type="Area3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.57206, 3.95811, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.53046, 33.3607, -8.06299)
+transform = Transform3D(1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 0, 0, 1, -4.54905, 64.3538, -7.52004)
 shape = SubResource("BoxShape3D_xdhrf")
