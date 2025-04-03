@@ -48,6 +48,7 @@ extends CharacterBody3D
 @export var dash_duration : float = 0.2
 @export var dash_cooldown : float = 0.5
 @export var input_dash : String = "dash"
+@export var dash_damage: int = 1
 
 var mouse_captured : bool = false
 var look_rotation : Vector2
@@ -60,7 +61,7 @@ var dash_cooldown_timer : float = 0.0
 var dash_direction : Vector3 = Vector3.ZERO
 var dash_icon: TextureRect
 var dash_label: Label
-
+var already_hit: Array = []
 
 
 ## IMPORTANT REFERENCES
@@ -175,9 +176,29 @@ func _physics_process(delta: float) -> void:
 		dash_timer -= delta
 		velocity = dash_direction * dash_speed
 
+		# Dash damage detection (Godot 4.x style)
+		var query := PhysicsShapeQueryParameters3D.new()
+		query.shape = collider.shape
+		query.transform = global_transform
+		query.motion = velocity * delta
+		query.collision_mask = 1  # Match this with your enemy layer
+
+		var space_state = get_world_3d().direct_space_state
+		var result = space_state.intersect_shape(query)
+
+		for hit in result:
+			var body = hit.get("collider")
+			if body and body.is_in_group("enemies") and not already_hit.has(body):
+				if body.has_method("take_damage"):
+					body.take_damage(dash_damage)
+					already_hit.append(body)
+
 		if dash_timer <= 0:
 			is_dashing = false
-			velocity = Vector3.ZERO  # Clean stop after dash
+			velocity = Vector3.ZERO
+			already_hit.clear()
+
+
 
 
 

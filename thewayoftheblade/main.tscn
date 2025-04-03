@@ -78,3 +78,15 @@ theme_override_font_sizes/font_size = 70
 
 [node name="Enemy" parent="." instance=ExtResource("3_0luuv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16178, 1.59827, -19.9797)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_0luuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3745, 2.90438, -15.2525)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_0luuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.5598, 3.2502, -2.37174)
+
+[node name="Enemy4" parent="." instance=ExtResource("3_0luuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.233, 2.6125, -27.3187)
+
+[node name="Enemy5" parent="." instance=ExtResource("3_0luuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.821, 1.87097, 2.52338)

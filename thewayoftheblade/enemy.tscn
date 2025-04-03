@@ -1,14 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwafujenjcu6f"]
+[gd_scene load_steps=6 format=3 uid="uid://cwafujenjcu6f"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_aqg13"]
+[ext_resource type="Material" uid="uid://dtdfj0kw1xm37" path="res://assets/material/enemyMaterialDefault.tres" id="2_hp1gi"]
+[ext_resource type="Material" uid="uid://c2ifcadtf6awp" path="res://assets/material/enemyMaterialHit.tres" id="3_0lhys"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bcgjh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yahsr"]
 lightmap_size_hint = Vector2i(17, 14)
+material = ExtResource("2_hp1gi")
 
 [node name="Enemy" type="CharacterBody3D"]
+collision_mask = 0
 script = ExtResource("1_aqg13")
+enemy_material_default = ExtResource("2_hp1gi")
+enemy_material_hit = ExtResource("3_0lhys")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_bcgjh")
