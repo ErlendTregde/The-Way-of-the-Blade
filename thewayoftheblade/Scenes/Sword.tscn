@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dg76molrg61ky"]
 
 [ext_resource type="PackedScene" uid="uid://ckmqvdw2ay4if" path="res://assets/models/Sword.glb" id="1_o73cy"]
-[ext_resource type="Script" path="res://sword.gd" id="2_o3n6a"]
+[ext_resource type="Script" path="res://scripts/sword.gd" id="2_o3n6a"]
 
 [sub_resource type="Animation" id="Animation_12mk0"]
 length = 0.001

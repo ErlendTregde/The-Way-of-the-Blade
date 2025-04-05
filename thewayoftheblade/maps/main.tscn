@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dcns1k3qljfiy"]
 
-[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_1dps7"]
-[ext_resource type="Texture2D" uid="uid://bidtlmptlleic" path="res://assets/images/dashLogo.png" id="2_23t51"]
-[ext_resource type="PackedScene" uid="uid://cwafujenjcu6f" path="res://enemy.tscn" id="3_0luuv"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_72lu7"]
+[ext_resource type="Texture2D" uid="uid://bidtlmptlleic" path="res://assets/images/dashLogo.png" id="2_v1luf"]
+[ext_resource type="PackedScene" uid="uid://cwafujenjcu6f" path="res://Scenes/enemy.tscn" id="3_irftm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qnas0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -31,7 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.85154, -0.242732, -21.8144
 use_collision = true
 size = Vector3(78.4015, 1, 98.2115)
 
-[node name="ProtoController" parent="." instance=ExtResource("1_1dps7")]
+[node name="ProtoController" parent="." instance=ExtResource("1_72lu7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31211, 0.25727, -1.53216)
 input_left = "move_left"
 input_right = "move_right"
@@ -56,7 +56,7 @@ offset_left = -200.0
 offset_top = -200.0
 grow_horizontal = 0
 grow_vertical = 0
-texture = ExtResource("2_23t51")
+texture = ExtResource("2_v1luf")
 expand_mode = 1
 stretch_mode = 5
 
@@ -76,17 +76,17 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 70
 
-[node name="Enemy" parent="." instance=ExtResource("3_0luuv")]
+[node name="Enemy" parent="." instance=ExtResource("3_irftm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16178, 1.59827, -19.9797)
 
-[node name="Enemy2" parent="." instance=ExtResource("3_0luuv")]
+[node name="Enemy2" parent="." instance=ExtResource("3_irftm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3745, 2.90438, -15.2525)
 
-[node name="Enemy3" parent="." instance=ExtResource("3_0luuv")]
+[node name="Enemy3" parent="." instance=ExtResource("3_irftm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.5598, 3.2502, -2.37174)
 
-[node name="Enemy4" parent="." instance=ExtResource("3_0luuv")]
+[node name="Enemy4" parent="." instance=ExtResource("3_irftm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.233, 2.6125, -27.3187)
 
-[node name="Enemy5" parent="." instance=ExtResource("3_0luuv")]
+[node name="Enemy5" parent="." instance=ExtResource("3_irftm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.821, 1.87097, 2.52338)

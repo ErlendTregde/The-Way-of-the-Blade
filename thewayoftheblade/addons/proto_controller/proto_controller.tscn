@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
-[ext_resource type="PackedScene" uid="uid://dg76molrg61ky" path="res://Sword.tscn" id="2_vq62d"]
+[ext_resource type="PackedScene" uid="uid://dg76molrg61ky" path="res://Scenes/Sword.tscn" id="2_vq62d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
@@ -36,4 +36,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
 [node name="Sword" parent="Head/Camera3D" instance=ExtResource("2_vq62d")]
-transform = Transform3D(0.00281908, 0.00102606, 0, -0.00102606, 0.00281908, 0, 0, 0, 0.003, 0.3, -0.2, 0)
