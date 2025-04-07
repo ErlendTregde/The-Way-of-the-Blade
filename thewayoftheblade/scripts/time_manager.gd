@@ -1,9 +1,8 @@
-# scripts/TimerManager.gd
 extends Node
 
 var time := 0.0
 var running := false
-var last_run_time := 0.0  # New!
+var last_run_time := 0.0 
 
 func _process(delta):
 	if running:
