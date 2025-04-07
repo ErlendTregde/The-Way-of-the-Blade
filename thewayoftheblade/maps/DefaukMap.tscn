@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcns1k3qljfiy"]
+[gd_scene load_steps=9 format=3 uid="uid://d36nkrchvw3mf"]
 
-[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_72lu7"]
-[ext_resource type="PackedScene" uid="uid://cwafujenjcu6f" path="res://Scenes/enemy.tscn" id="3_irftm"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_0d6w2"]
+[ext_resource type="PackedScene" uid="uid://cwafujenjcu6f" path="res://Scenes/enemy.tscn" id="2_ii2d4"]
+[ext_resource type="PackedScene" uid="uid://boyvuqs8t37ov" path="res://Scenes/portal.tscn" id="3_15ywg"]
+[ext_resource type="Script" path="res://scripts/level_timer_starter.gd" id="4_jmirx"]
+[ext_resource type="PackedScene" uid="uid://b3estgpg3stra" path="res://Scenes/timer_ui.tscn" id="5_gdcp2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qnas0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -16,7 +19,9 @@ sky = SubResource("Sky_srud0")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Main" type="Node3D"]
+[node name="DeafultMap" type="Node3D"]
+
+[node name="TimerUi" parent="." instance=ExtResource("5_gdcp2")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hw600")
@@ -30,7 +35,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.85154, -0.242732, -21.8144
 use_collision = true
 size = Vector3(78.4015, 1, 98.2115)
 
-[node name="ProtoController" parent="." instance=ExtResource("1_72lu7")]
+[node name="ProtoController" parent="." instance=ExtResource("1_0d6w2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31211, 0.25727, -1.53216)
 input_left = "move_left"
 input_right = "move_right"
@@ -43,17 +48,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0437, 1.62024, 2.72799)
 use_collision = true
 size = Vector3(3.0874, 2.67554, 2.13623)
 
-[node name="Enemy" parent="." instance=ExtResource("3_irftm")]
+[node name="Enemy" parent="." instance=ExtResource("2_ii2d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16178, 1.59827, -19.9797)
 
-[node name="Enemy2" parent="." instance=ExtResource("3_irftm")]
+[node name="Enemy2" parent="." instance=ExtResource("2_ii2d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3745, 2.90438, -15.2525)
 
-[node name="Enemy3" parent="." instance=ExtResource("3_irftm")]
+[node name="Enemy3" parent="." instance=ExtResource("2_ii2d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.5598, 3.2502, -2.37174)
 
-[node name="Enemy4" parent="." instance=ExtResource("3_irftm")]
+[node name="Enemy4" parent="." instance=ExtResource("2_ii2d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.233, 2.6125, -27.3187)
 
-[node name="Enemy5" parent="." instance=ExtResource("3_irftm")]
+[node name="Enemy5" parent="." instance=ExtResource("2_ii2d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.821, 1.87097, 2.52338)
+
+[node name="Portal" parent="." instance=ExtResource("3_15ywg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.44324, 0.257268, -55.1168)
+
+[node name="TimerStarter" type="Node3D" parent="."]
+script = ExtResource("4_jmirx")

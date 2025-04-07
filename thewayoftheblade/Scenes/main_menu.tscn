@@ -26,8 +26,9 @@ text = "The Way Of The blade"
 layout_mode = 2
 text = "Map 1"
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="DeafultMap" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "SandBox"
+text = "Deafult"
 
 [connection signal="pressed" from="VBoxContainer/main" to="." method="_on_main_pressed"]
+[connection signal="pressed" from="VBoxContainer/DeafultMap" to="." method="_on_deafult_map_pressed"]

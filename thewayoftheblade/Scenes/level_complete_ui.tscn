@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://jbuvplsu5j4m"]
+
+[ext_resource type="Script" path="res://scripts/level_complete_ui.gd" id="1_rxkps"]
+
+[node name="LevelCompleteUi" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_rxkps")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TimeLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ReturnButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Return to Main Menu"
+
+[connection signal="pressed" from="VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]

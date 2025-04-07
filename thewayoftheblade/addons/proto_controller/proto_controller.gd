@@ -76,8 +76,8 @@ func _ready() -> void:
 	check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
-	dash_icon = get_node("../UI/DashIcon")
-	dash_label = get_node("../UI/DashIcon/Label")  # Make sure you have a Label inside DashIcon
+	dash_icon = get_node("UI/DashIcon")
+	dash_label = get_node("UI/DashIcon/Label")  # Make sure you have a Label inside DashIcon
 	dash_label.visible = false
 	dash_icon.modulate.a = 1.0
 	add_to_group("players")
@@ -197,9 +197,6 @@ func _physics_process(delta: float) -> void:
 			is_dashing = false
 			velocity = Vector3.ZERO
 			already_hit.clear()
-
-
-
 
 
 

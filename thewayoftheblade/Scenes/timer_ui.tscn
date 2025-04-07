@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3estgpg3stra"]
+
+[ext_resource type="Script" path="res://scripts/timer_ui.gd" id="1_vid6o"]
+
+[node name="TimerUi" type="CanvasLayer"]
+script = ExtResource("1_vid6o")
+
+[node name="TimerLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
