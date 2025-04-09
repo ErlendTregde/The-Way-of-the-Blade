@@ -22,7 +22,7 @@ func take_damage(amount: int) -> void:
 	damage_label.visible = true
 
 	# Swap to hit material
-	mesh.set_surface_override_material(0.15, enemy_material_hit)
+	mesh.set_surface_override_material(0, enemy_material_hit)
 
 	await get_tree().create_timer(0.3).timeout
 
