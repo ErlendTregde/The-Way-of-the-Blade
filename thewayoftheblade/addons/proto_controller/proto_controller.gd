@@ -68,7 +68,7 @@ var already_hit: Array = []
 @onready var head: Node3D = $Head
 @onready var collider: CollisionShape3D = $Collider
 @onready var camera: Camera3D = $Head/Camera3D
-@onready var sword_anim: AnimationPlayer = $Head/Camera3D/Sword/AnimationPlayer
+@onready var sword_anim: AnimationPlayer = $Head/Camera3D/WeaponPivot/Sword/AnimationPlayer
 
 
 
@@ -80,6 +80,7 @@ func _ready() -> void:
 	dash_label = get_node("UI/DashIcon/Label")  # Make sure you have a Label inside DashIcon
 	dash_label.visible = false
 	dash_icon.modulate.a = 1.0
+	sword_anim.play("idle")
 	add_to_group("players")
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -90,11 +91,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		release_mouse()
 	
 	if not is_dashing and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		sword_anim.play("slash")
-		$Head/Camera3D/Sword.slash()
-
-
+		sword_anim.play("attack")
+		$Head/Camera3D/WeaponPivot/Sword.slash()
 	
+		# Return to idle after attack finishes
+		await sword_anim.animation_finished
+		sword_anim.play("idle")
+			
 	# Look around
 	if mouse_captured and event is InputEventMouseMotion:
 		rotate_look(event.relative)
@@ -107,6 +110,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			disable_freefly()
 
 func _physics_process(delta: float) -> void:
+	
 	# If freeflying, handle freefly and nothing else
 	if can_freefly and freeflying:
 		var input_dir := Input.get_vector(input_left, input_right, input_forward, input_back)
@@ -166,7 +170,7 @@ func _physics_process(delta: float) -> void:
 		is_dashing = true
 		dash_timer = dash_duration
 		dash_cooldown_timer = dash_cooldown
-		$Head/Camera3D/Sword.slash()
+		$Head/Camera3D/WeaponPivot/Sword.slash()
 
 		# Capture full 3D look direction at start of dash
 		dash_direction = -camera.global_transform.basis.z.normalized()
@@ -197,8 +201,6 @@ func _physics_process(delta: float) -> void:
 			is_dashing = false
 			velocity = Vector3.ZERO
 			already_hit.clear()
-
-
 
 	# Use velocity to actually move
 	move_and_slide()

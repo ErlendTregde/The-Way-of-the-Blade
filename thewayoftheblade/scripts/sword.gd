@@ -11,9 +11,11 @@ func _ready() -> void:
 func slash() -> void:
 	is_slashing = true
 	hitbox.monitoring = true
+
 	await get_tree().create_timer(0.1).timeout
 	is_slashing = false
 	hitbox.monitoring = false
+
 
 func _on_body_entered(body: Node) -> void:
 	if is_slashing and body.has_method("take_damage"):

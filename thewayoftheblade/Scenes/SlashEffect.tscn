@@ -1,0 +1,69 @@
+[gd_scene load_steps=15 format=3 uid="uid://derpm8pphof7b"]
+
+[ext_resource type="Shader" path="res://assets/material/SlashEffect.gdshader" id="1_qlwos"]
+[ext_resource type="Script" path="res://scripts/slash_effect.gd" id="2_182qi"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v0uff"]
+noise_type = 2
+fractal_gain = 4.0
+cellular_distance_function = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w2q6m"]
+height = 128
+seamless = true
+noise = SubResource("FastNoiseLite_v0uff")
+
+[sub_resource type="Gradient" id="Gradient_ri8u8"]
+offsets = PackedFloat32Array(0, 0, 1)
+colors = PackedColorArray(0, 0.25098, 0.74902, 1, 5.35455e-07, 0.273318, 0.00237701, 1, 0.619862, 0.0330318, 0.227003, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ppqhi"]
+gradient = SubResource("Gradient_ri8u8")
+width = 512
+
+[sub_resource type="Gradient" id="Gradient_q2t8h"]
+offsets = PackedFloat32Array(0.5, 0.52, 0.54)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0.0952381, 0.0952381, 0.0952381, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4w3sp"]
+gradient = SubResource("Gradient_q2t8h")
+
+[sub_resource type="Gradient" id="Gradient_b2okq"]
+offsets = PackedFloat32Array(0.25, 0.4, 0.6, 0.65, 0.7)
+colors = PackedColorArray(1, 1, 1, 1, 0.498039, 0.498039, 0.498039, 1, 0, 0, 0, 1, 0.498039, 0.498039, 0.498039, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1b7sb"]
+gradient = SubResource("Gradient_b2okq")
+
+[sub_resource type="Gradient" id="Gradient_v7hv4"]
+offsets = PackedFloat32Array(0.2, 0.5, 0.52)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 0.945578, 0.945578, 0.945578, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x63bf"]
+gradient = SubResource("Gradient_v7hv4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ip252"]
+render_priority = 0
+shader = ExtResource("1_qlwos")
+shader_parameter/progress = 0.0
+shader_parameter/derive_progress = -1.0
+shader_parameter/ease_progress = -1.0
+shader_parameter/time_scale = 0.25
+shader_parameter/anim_rot_amt = 1.0
+shader_parameter/zoom = 0.6
+shader_parameter/rotate_all = 360.0
+shader_parameter/base_noise = SubResource("NoiseTexture2D_w2q6m")
+shader_parameter/width_gradient_mask = SubResource("GradientTexture1D_x63bf")
+shader_parameter/length_gradient_mask = SubResource("GradientTexture1D_1b7sb")
+shader_parameter/highlight = SubResource("GradientTexture1D_4w3sp")
+shader_parameter/emission_strength = 1.0
+shader_parameter/mix_strength = 1.5
+shader_parameter/color_lookup = SubResource("GradientTexture1D_ppqhi")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ehs0h"]
+material = SubResource("ShaderMaterial_ip252")
+size = Vector2(5, 5)
+
+[node name="SlashEffect" type="MeshInstance3D"]
+mesh = SubResource("QuadMesh_ehs0h")
+script = ExtResource("2_182qi")
