@@ -110,6 +110,10 @@ func _ready() -> void:
 	original_camera_y = camera.position.y
 	original_head_y = head.position.y
 	
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	mouse_captured = true
+
+	
 
 
 func _unhandled_input(event: InputEvent) -> void:
