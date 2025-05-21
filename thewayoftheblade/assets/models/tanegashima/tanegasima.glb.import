@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ckmqvdw2ay4if"
-path="res://.godot/imported/Sword.glb-0c79e536de81ff06f918446e2a91e387.scn"
+uid="uid://yircig2hpvof"
+path="res://.godot/imported/tanegasima.glb-3a1c5f577202239429a9551f105eb7bd.scn"
 
 [deps]
 
-source_file="res://assets/models/Sword.glb"
-dest_files=["res://.godot/imported/Sword.glb-0c79e536de81ff06f918446e2a91e387.scn"]
+source_file="res://assets/models/tanegashima/tanegasima.glb"
+dest_files=["res://.godot/imported/tanegasima.glb-3a1c5f577202239429a9551f105eb7bd.scn"]
 
 [params]
 
@@ -18,6 +18,7 @@ nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
+nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
 meshes/create_shadow_meshes=true

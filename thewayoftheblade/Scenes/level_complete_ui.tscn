@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://jbuvplsu5j4m"]
 
-[ext_resource type="Script" path="res://scripts/level_complete_ui.gd" id="1_rxkps"]
+[ext_resource type="Script" uid="uid://d2d3l0jwr636s" path="res://scripts/level_complete_ui.gd" id="1_rxkps"]
 
 [node name="LevelCompleteUi" type="Control"]
 layout_mode = 3

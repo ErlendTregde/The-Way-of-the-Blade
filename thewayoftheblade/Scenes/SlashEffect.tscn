@@ -1,7 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://derpm8pphof7b"]
 
-[ext_resource type="Shader" path="res://assets/material/SlashEffect.gdshader" id="1_qlwos"]
-[ext_resource type="Script" path="res://scripts/slash_effect.gd" id="2_182qi"]
+[ext_resource type="Shader" uid="uid://cvcutew6jldf7" path="res://assets/material/SlashEffect.gdshader" id="1_qlwos"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_v0uff"]
 noise_type = 2
@@ -50,12 +49,12 @@ shader_parameter/derive_progress = -1.0
 shader_parameter/ease_progress = -1.0
 shader_parameter/time_scale = 0.25
 shader_parameter/anim_rot_amt = 1.0
-shader_parameter/zoom = 0.6
-shader_parameter/rotate_all = 360.0
 shader_parameter/base_noise = SubResource("NoiseTexture2D_w2q6m")
 shader_parameter/width_gradient_mask = SubResource("GradientTexture1D_x63bf")
 shader_parameter/length_gradient_mask = SubResource("GradientTexture1D_1b7sb")
 shader_parameter/highlight = SubResource("GradientTexture1D_4w3sp")
+shader_parameter/zoom = 0.6
+shader_parameter/rotate_all = 360.0
 shader_parameter/emission_strength = 1.0
 shader_parameter/mix_strength = 1.5
 shader_parameter/color_lookup = SubResource("GradientTexture1D_ppqhi")
@@ -64,6 +63,9 @@ shader_parameter/color_lookup = SubResource("GradientTexture1D_ppqhi")
 material = SubResource("ShaderMaterial_ip252")
 size = Vector2(5, 5)
 
+[sub_resource type="Resource" id="Resource_rftts"]
+metadata/__load_path__ = "res://scripts/slash_effect.gd"
+
 [node name="SlashEffect" type="MeshInstance3D"]
 mesh = SubResource("QuadMesh_ehs0h")
-script = ExtResource("2_182qi")
+script = SubResource("Resource_rftts")

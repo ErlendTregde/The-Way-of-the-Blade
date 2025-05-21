@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjtpqca3t14pa"
-path.s3tc="res://.godot/imported/Sword_2.png-efca507ae0c4afce961720afcad0eeca.s3tc.ctex"
+uid="uid://b8t4nit0ndsko"
+path.s3tc="res://.godot/imported/Sword_3.png-8ccd6742981783548e9f722b436fc71e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "2b64b609ae5c000b6b70811c5fbceb41"
+"md5": "99614e03fd8572b23d23f9f510d86db0"
 }
 
 [deps]
 
-source_file="res://assets/models/Sword_2.png"
-dest_files=["res://.godot/imported/Sword_2.png-efca507ae0c4afce961720afcad0eeca.s3tc.ctex"]
+source_file="res://assets/models/sword/Sword_3.png"
+dest_files=["res://.godot/imported/Sword_3.png-8ccd6742981783548e9f722b436fc71e.s3tc.ctex"]
 
 [params]
 
@@ -23,12 +23,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://assets/models/sword/Sword_3.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

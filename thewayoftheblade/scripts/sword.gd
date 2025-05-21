@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var damage := 1
-@onready var hitbox: Area3D = $HitBox
+@onready var hitbox: Area3D = $"Sketchfab_model/blue sword_fbx/RootNode/sword_balde1/HitBox"
 var is_slashing := false
 
 func _ready() -> void:

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_0d6w2"]
 [ext_resource type="PackedScene" uid="uid://cwafujenjcu6f" path="res://Scenes/enemy.tscn" id="2_ii2d4"]
 [ext_resource type="PackedScene" uid="uid://boyvuqs8t37ov" path="res://Scenes/portal.tscn" id="3_15ywg"]
-[ext_resource type="Script" path="res://scripts/level_timer_starter.gd" id="4_jmirx"]
+[ext_resource type="Script" uid="uid://bm6ruo4cce8xb" path="res://scripts/level_timer_starter.gd" id="4_jmirx"]
 [ext_resource type="PackedScene" uid="uid://b3estgpg3stra" path="res://Scenes/timer_ui.tscn" id="5_gdcp2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qnas0"]
