@@ -81,6 +81,10 @@ var slide_cooldown_timer : float = 0.0
 var slide_direction : Vector3 = Vector3.ZERO
 var original_camera_y : float
 
+var slide_icon: TextureRect
+var slide_label: Label
+
+
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
 @onready var collider: CollisionShape3D = $Collider
@@ -95,12 +99,17 @@ func _ready() -> void:
 	look_rotation.x = head.rotation.x
 	dash_icon = get_node("UI/DashIcon")
 	dash_label = get_node("UI/DashIcon/Label")  # Make sure you have a Label inside DashIcon
+	slide_icon = get_node("UI/SlideIcon")
+	slide_label = get_node("UI/SlideIcon/Label")
+	slide_label.visible = false
+	slide_icon.modulate.a = 1.0
 	dash_label.visible = false
 	dash_icon.modulate.a = 1.0
 	sword_anim.play("idle")
 	add_to_group("players")
 	original_camera_y = camera.position.y
 	original_head_y = head.position.y
+	
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -225,6 +234,13 @@ func _physics_process(delta: float) -> void:
 		# Slide cooldown timer
 	if slide_cooldown_timer > 0:
 		slide_cooldown_timer -= delta
+		slide_icon.modulate.a = 0.4
+		slide_label.visible = true
+		slide_label.text = str(ceil(slide_cooldown_timer))
+	else:
+		slide_icon.modulate.a = 1.0
+		slide_label.visible = false
+
 
 	# Slide start
 	if Input.is_action_just_pressed(input_slide) and not is_sliding and slide_cooldown_timer <= 0 and not is_dashing:
