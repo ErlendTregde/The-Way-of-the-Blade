@@ -213,6 +213,9 @@ script = ExtResource("1_ucva2")
 dash_speed = 35.0
 dash_duration = 0.4
 dash_cooldown = 5.0
+slide_duration = 2.0
+slide_cooldown = 10.0
+slide_camera_shrink = 0.5
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -237,7 +240,7 @@ transform = Transform3D(0.00274909, -0.00120105, 0, 0.00120105, 0.00274909, 0, 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera3D/WeaponPivot/Sword"]
 libraries = {
-"": SubResource("AnimationLibrary_jj2ng")
+&"": SubResource("AnimationLibrary_jj2ng")
 }
 autoplay = "running"
 

@@ -50,6 +50,17 @@ extends CharacterBody3D
 @export var input_dash : String = "dash"
 @export var dash_damage: int = 1
 
+
+@export_group("Slide")
+@export var input_slide : String = "slide"
+@export var slide_speed : float = 14.0
+@export var slide_duration : float = 0.5
+@export var slide_cooldown : float = 1.0
+@export var slide_camera_shrink : float = 0.8
+var original_head_y: float
+
+
+
 var mouse_captured : bool = false
 var look_rotation : Vector2
 var move_speed : float = 0.0
@@ -63,6 +74,12 @@ var dash_icon: TextureRect
 var dash_label: Label
 var already_hit: Array = []
 
+
+var is_sliding : bool = false
+var slide_timer : float = 0.0
+var slide_cooldown_timer : float = 0.0
+var slide_direction : Vector3 = Vector3.ZERO
+var original_camera_y : float
 
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
@@ -82,6 +99,9 @@ func _ready() -> void:
 	dash_icon.modulate.a = 1.0
 	sword_anim.play("idle")
 	add_to_group("players")
+	original_camera_y = camera.position.y
+	original_head_y = head.position.y
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Mouse capturing
@@ -201,6 +221,38 @@ func _physics_process(delta: float) -> void:
 			is_dashing = false
 			velocity = Vector3.ZERO
 			already_hit.clear()
+	
+		# Slide cooldown timer
+	if slide_cooldown_timer > 0:
+		slide_cooldown_timer -= delta
+
+	# Slide start
+	if Input.is_action_just_pressed(input_slide) and not is_sliding and slide_cooldown_timer <= 0 and not is_dashing:
+		is_sliding = true
+		slide_timer = slide_duration
+		slide_cooldown_timer = slide_cooldown
+		slide_direction = -camera.global_transform.basis.z.normalized()
+		head.position.y = original_head_y * slide_camera_shrink
+		velocity.y = -20.0  # force downward momentum
+
+	# Sliding movement
+	if is_sliding:
+		# Cancel slide early if we jump or dash
+		if Input.is_action_just_pressed(input_jump) or is_dashing:
+			is_sliding = false
+			slide_timer = 0.0
+
+		slide_timer -= delta
+		velocity = slide_direction * slide_speed
+		velocity.y = -20.0
+
+		if slide_timer <= 0:
+			is_sliding = false
+
+
+	
+	var target_y = original_head_y * slide_camera_shrink if is_sliding else original_head_y
+	head.position.y = lerp(head.position.y, target_y, delta * 10)
 
 	# Use velocity to actually move
 	move_and_slide()
@@ -267,3 +319,6 @@ func check_input_mappings():
 	if can_freefly and not InputMap.has_action(input_freefly):
 		push_error("Freefly disabled. No InputAction found for input_freefly: " + input_freefly)
 		can_freefly = false
+	if not InputMap.has_action(input_slide):
+		push_error("Slide disabled. No InputAction found for input_slide: " + input_slide)
+	
