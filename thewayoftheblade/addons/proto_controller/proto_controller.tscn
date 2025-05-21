@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bs72ogkvdd7d6"]
+[gd_scene load_steps=14 format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" uid="uid://vp15mqbuqlb" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
+[ext_resource type="Script" uid="uid://b7bdbs3adam7b" path="res://scripts/camera_3d.gd" id="2_0rk7u"]
 [ext_resource type="PackedScene" uid="uid://dg76molrg61ky" path="res://Scenes/Sword.tscn" id="2_vq62d"]
 [ext_resource type="Texture2D" uid="uid://bidtlmptlleic" path="res://assets/images/dashLogo.png" id="3_dridk"]
 [ext_resource type="Texture2D" uid="uid://deds3yvs8mamt" path="res://assets/images/ChatGPT Image 21. mai 2025, 23_24_30.png" id="4_6dqce"]
@@ -232,6 +233,7 @@ shape = SubResource("CapsuleShape3D_iof21")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
+script = ExtResource("2_0rk7u")
 
 [node name="WeaponPivot" type="Node3D" parent="Head/Camera3D"]
 transform = Transform3D(-0.945837, 0, 0.324641, 0, 1, 0, -0.324641, 0, -0.945837, 0, 0, 0)

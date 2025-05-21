@@ -84,6 +84,12 @@ var original_camera_y : float
 var slide_icon: TextureRect
 var slide_label: Label
 
+var is_slam_charging: bool = false
+var slam_fall_speed_threshold: float = -18.0  # Tune this
+var slam_radius: float = 10  # AoE effect radius
+var slam_damage: int = 3
+
+
 
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
@@ -269,6 +275,14 @@ func _physics_process(delta: float) -> void:
 		if slide_timer <= 0:
 			is_sliding = false
 
+	# Trigger aerial slam (only in air, not dashing, not grounded)
+	if not is_on_floor() and not is_dashing and not is_slam_charging:
+		if Input.is_action_just_pressed(input_slide) and velocity.y < slam_fall_speed_threshold:
+			is_slam_charging = true
+			velocity.y = -30.0  # Slam dive speed
+			print("SLAM charging from air!")
+
+
 
 	
 	var target_y = original_head_y * slide_camera_shrink if is_sliding else original_head_y
@@ -276,6 +290,32 @@ func _physics_process(delta: float) -> void:
 
 	# Use velocity to actually move
 	move_and_slide()
+	
+	# Slam landing impact
+	if is_slam_charging and is_on_floor():
+		is_slam_charging = false
+
+		var sphere := SphereShape3D.new()
+		sphere.radius = slam_radius
+
+		var shape_query := PhysicsShapeQueryParameters3D.new()
+		shape_query.shape = sphere
+		shape_query.transform = Transform3D(Basis(), global_position)
+		shape_query.collide_with_bodies = true
+		shape_query.collision_mask = 1
+
+		var result = get_world_3d().direct_space_state.intersect_shape(shape_query)
+		for hit in result:
+			var body = hit.get("collider")
+			if body and body.is_in_group("enemies") and body.has_method("take_damage"):
+				body.take_damage(slam_damage)
+	
+		camera.shake(0.3, 0.5)  # Stronger
+		dash_cooldown_timer = 0.0
+		print("SLAM IMPACT! Hit", result.size(), "enemies.")
+
+
+
 
 
 ## Rotate us to look around.
