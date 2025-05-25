@@ -4,6 +4,7 @@ extends Control
 @onready var time_label: Label = $VBoxContainer/TimeLabel
 
 func _ready() -> void:
+	$AnimationPlayer.play("level_complete")
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 	var t := TimeManager.get_last_time()

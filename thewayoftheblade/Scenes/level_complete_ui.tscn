@@ -1,6 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://jbuvplsu5j4m"]
+[gd_scene load_steps=9 format=3 uid="uid://jbuvplsu5j4m"]
 
 [ext_resource type="Script" uid="uid://d2d3l0jwr636s" path="res://scripts/level_complete_ui.gd" id="1_rxkps"]
+[ext_resource type="Texture2D" uid="uid://dq8m5wb266e4k" path="res://assets/images/characterRun.png" id="2_bdcaj"]
+[ext_resource type="Texture2D" uid="uid://0xmj70vhb0wu" path="res://assets/images/characterSwing.png" id="3_pv8cx"]
+[ext_resource type="Texture2D" uid="uid://bvgutc04m8x4h" path="res://assets/images/characterdash.png" id="4_vi6ga"]
+[ext_resource type="Texture2D" uid="uid://ceiymqywrw4va" path="res://assets/images/character.png" id="5_pv8cx"]
+
+[sub_resource type="Animation" id="Animation_yc21n"]
+resource_name = "level_complete"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_bdcaj"), ExtResource("4_vi6ga"), ExtResource("3_pv8cx"), ExtResource("5_pv8cx")]
+}
+
+[sub_resource type="Animation" id="Animation_bdcaj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_bdcaj")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l6bm2"]
+_data = {
+&"RESET": SubResource("Animation_bdcaj"),
+&"level_complete": SubResource("Animation_yc21n")
+}
 
 [node name="LevelCompleteUi" type="Control"]
 layout_mode = 3
@@ -18,5 +58,22 @@ layout_mode = 2
 [node name="ReturnButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Return to Main Menu"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_l6bm2")
+}
+
+[node name="TextureRect" type="TextureRect" parent="AnimationPlayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -512.0
+offset_right = 512.0
+offset_bottom = 512.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_bdcaj")
+expand_mode = 1
 
 [connection signal="pressed" from="VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]

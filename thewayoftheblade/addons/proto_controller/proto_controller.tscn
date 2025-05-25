@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bs72ogkvdd7d6"]
+[gd_scene load_steps=16 format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" uid="uid://vp15mqbuqlb" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
 [ext_resource type="Script" uid="uid://b7bdbs3adam7b" path="res://scripts/camera_3d.gd" id="2_0rk7u"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://deds3yvs8mamt" path="res://assets/images/ChatGPT Image 21. mai 2025, 23_24_30.png" id="4_6dqce"]
 [ext_resource type="Texture2D" uid="uid://pwtn7dupfp8y" path="res://assets/images/ChatGPT Image 25. mai 2025, 16_21_37.png" id="4_h60nn"]
 [ext_resource type="Texture2D" uid="uid://bb6oss5eofb70" path="res://assets/images/ChatGPT Image 25. mai 2025, 16_48_00.png" id="6_h60nn"]
+[ext_resource type="Texture2D" uid="uid://bavona6getssn" path="res://assets/images/ChatGPT Image 25. mai 2025, 20_20_24.png" id="7_ujot4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
@@ -375,3 +376,13 @@ offset_right = 72.0
 offset_bottom = 111.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "shift"
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 200.0
+grow_horizontal = 0
+texture = ExtResource("7_ujot4")
+expand_mode = 1
