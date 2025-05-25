@@ -103,10 +103,10 @@ func _ready() -> void:
 	check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
-	dash_icon = get_node("UI/DashIcon")
-	dash_label = get_node("UI/DashIcon/Label")  # Make sure you have a Label inside DashIcon
-	slide_icon = get_node("UI/SlideIcon")
-	slide_label = get_node("UI/SlideIcon/Label")
+	dash_icon = get_node("UI/UiBox/DashIcon")
+	dash_label = get_node("UI/UiBox/DashIcon/Label")  # Make sure you have a Label inside DashIcon
+	slide_icon = get_node("UI/UiBox/SlideIcon")
+	slide_label = get_node("UI/UiBox/SlideIcon/Label")
 	slide_label.visible = false
 	slide_icon.modulate.a = 1.0
 	dash_label.visible = false

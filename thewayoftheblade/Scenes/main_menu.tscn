@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dn2ccs66n184r"]
+[gd_scene load_steps=3 format=3 uid="uid://dn2ccs66n184r"]
 
 [ext_resource type="Script" uid="uid://dcyfbtdxu66xr" path="res://scripts/main_menu.gd" id="1_gb72y"]
+[ext_resource type="Texture2D" uid="uid://ceiymqywrw4va" path="res://assets/images/character.png" id="2_48xlc"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -38,6 +39,15 @@ text = "Map 1"
 [node name="DeafultMap" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Deafult"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -647.0
+offset_top = -607.0
+offset_right = -135.0
+offset_bottom = 417.0
+texture = ExtResource("2_48xlc")
+expand_mode = 1
 
 [connection signal="pressed" from="VBoxContainer/main" to="." method="_on_main_pressed"]
 [connection signal="pressed" from="VBoxContainer/DeafultMap" to="." method="_on_deafult_map_pressed"]
