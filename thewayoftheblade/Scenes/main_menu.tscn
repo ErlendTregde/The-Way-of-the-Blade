@@ -1,18 +1,42 @@
-[gd_scene load_steps=3 format=3 uid="uid://dn2ccs66n184r"]
+[gd_scene load_steps=4 format=3 uid="uid://dn2ccs66n184r"]
 
 [ext_resource type="Script" uid="uid://dcyfbtdxu66xr" path="res://scripts/main_menu.gd" id="1_gb72y"]
 [ext_resource type="Texture2D" uid="uid://ceiymqywrw4va" path="res://assets/images/character.png" id="2_48xlc"]
+[ext_resource type="Texture2D" uid="uid://bv1xa6skwocb3" path="res://assets/images/ChatGPT Image 26. mai 2025, 00_03_23.png" id="3_1ehe0"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gb72y")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -512.0
+offset_right = 512.0
+offset_bottom = 512.0
+grow_vertical = 2
+texture = ExtResource("2_48xlc")
+expand_mode = 1
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_1ehe0")
+expand_mode = 3
+stretch_mode = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -39,15 +63,6 @@ text = "Map 1"
 [node name="DeafultMap" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Deafult"
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = -647.0
-offset_top = -607.0
-offset_right = -135.0
-offset_bottom = 417.0
-texture = ExtResource("2_48xlc")
-expand_mode = 1
 
 [connection signal="pressed" from="VBoxContainer/main" to="." method="_on_main_pressed"]
 [connection signal="pressed" from="VBoxContainer/DeafultMap" to="." method="_on_deafult_map_pressed"]
