@@ -88,7 +88,7 @@ var is_slam_charging: bool = false
 var slam_fall_speed_threshold: float = -18.0  # Tune this
 var slam_radius: float = 10  # AoE effect radius
 var slam_damage: int = 3
-
+var is_attacking := false
 
 
 ## IMPORTANT REFERENCES
@@ -96,7 +96,7 @@ var slam_damage: int = 3
 @onready var collider: CollisionShape3D = $Collider
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var sword_anim: AnimationPlayer = $Head/Camera3D/WeaponPivot/Sword/AnimationPlayer
-
+@onready var melee_hitbox: Area3D = $Head/Camera3D/MeleeHitBox	
 
 
 func _ready() -> void:
@@ -116,6 +116,10 @@ func _ready() -> void:
 	original_camera_y = camera.position.y
 	original_head_y = head.position.y
 	
+	melee_hitbox.monitoring = false
+	melee_hitbox.body_entered.connect(_on_melee_body_entered)
+
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	mouse_captured = true
 
@@ -130,12 +134,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		release_mouse()
 	
 	if not is_dashing and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		is_attacking = true
 		sword_anim.play("attack")
-		$Head/Camera3D/WeaponPivot/Sword.slash()
-	
-		# Return to idle after attack finishes
+
+		await get_tree().create_timer(0.1).timeout  # Only enable hitbox briefly
+		melee_hitbox.monitoring = true
+
+		await get_tree().create_timer(0.1).timeout
+		melee_hitbox.monitoring = false
+		is_attacking = false
+
 		await sword_anim.animation_finished
 		sword_anim.play("idle")
+
 			
 	# Look around
 	if mouse_captured and event is InputEventMouseMotion:
@@ -209,7 +220,6 @@ func _physics_process(delta: float) -> void:
 		is_dashing = true
 		dash_timer = dash_duration
 		dash_cooldown_timer = dash_cooldown
-		$Head/Camera3D/WeaponPivot/Sword.slash()
 
 		# Capture full 3D look direction at start of dash
 		dash_direction = -camera.global_transform.basis.z.normalized()
@@ -315,6 +325,9 @@ func _physics_process(delta: float) -> void:
 		print("SLAM IMPACT! Hit", result.size(), "enemies.")
 
 
+func _on_melee_body_entered(body: Node) -> void:
+	if is_attacking and body.has_method("take_damage"):
+		body.take_damage(1)
 
 
 

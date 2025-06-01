@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dcyfbtdxu66xr" path="res://scripts/main_menu.gd" id="1_gb72y"]
 [ext_resource type="Texture2D" uid="uid://ceiymqywrw4va" path="res://assets/images/character.png" id="2_48xlc"]
-[ext_resource type="Texture2D" uid="uid://bv1xa6skwocb3" path="res://assets/images/ChatGPT Image 26. mai 2025, 00_03_23.png" id="3_1ehe0"]
+[ext_resource type="Texture2D" uid="uid://da1hueskb70pt" path="res://assets/images/ChatGPT Image 29. mai 2025, 18_41_51.png" id="3_1ehe0"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3

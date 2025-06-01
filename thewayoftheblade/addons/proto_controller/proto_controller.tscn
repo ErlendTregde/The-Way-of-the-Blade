@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bs72ogkvdd7d6"]
+[gd_scene load_steps=17 format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" uid="uid://vp15mqbuqlb" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
 [ext_resource type="Script" uid="uid://b7bdbs3adam7b" path="res://scripts/camera_3d.gd" id="2_0rk7u"]
@@ -212,6 +212,9 @@ _data = {
 &"running": SubResource("Animation_8frn1")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ujot4"]
+size = Vector3(2.19577, 1, 1.41284)
+
 [node name="ProtoController" type="CharacterBody3D"]
 script = ExtResource("1_ucva2")
 dash_speed = 35.0
@@ -248,6 +251,13 @@ libraries = {
 &"": SubResource("AnimationLibrary_jj2ng")
 }
 autoplay = "running"
+
+[node name="MeleeHitBox" type="Area3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0653811, -1.37723, -0.0763834)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Camera3D/MeleeHitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0379453, 0.890476, -1.17166)
+shape = SubResource("BoxShape3D_ujot4")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
