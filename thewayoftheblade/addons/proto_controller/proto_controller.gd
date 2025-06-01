@@ -312,7 +312,8 @@ func _physics_process(delta: float) -> void:
 		shape_query.shape = sphere
 		shape_query.transform = Transform3D(Basis(), global_position)
 		shape_query.collide_with_bodies = true
-		shape_query.collision_mask = 1
+		shape_query.collision_mask = (1 << 1) 
+
 
 		var result = get_world_3d().direct_space_state.intersect_shape(shape_query)
 		for hit in result:

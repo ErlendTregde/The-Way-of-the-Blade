@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var max_health := 3
+@export var max_health := 2
 @export var enemy_material_default: Material
 @export var enemy_material_hit: Material
 
