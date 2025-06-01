@@ -225,22 +225,16 @@ func _physics_process(delta: float) -> void:
 		dash_direction = -camera.global_transform.basis.z.normalized()
 
 	# Dash movement (locked direction)
+	# Dash movement (locked direction)
 	if is_dashing:
 		dash_timer -= delta
 		velocity = dash_direction * dash_speed
 
-		# Dash damage detection (Godot 4.x style)
-		var query := PhysicsShapeQueryParameters3D.new()
-		query.shape = collider.shape
-		query.transform = global_transform
-		query.motion = velocity * delta
-		query.collision_mask = 1  # Match this with your enemy layer
+		# Temporarily activate the hitbox for overlap check
+		melee_hitbox.monitoring = true
+		var overlapping_bodies = melee_hitbox.get_overlapping_bodies()
 
-		var space_state = get_world_3d().direct_space_state
-		var result = space_state.intersect_shape(query)
-
-		for hit in result:
-			var body = hit.get("collider")
+		for body in overlapping_bodies:
 			if body and body.is_in_group("enemies") and not already_hit.has(body):
 				if body.has_method("take_damage"):
 					body.take_damage(dash_damage)
@@ -250,8 +244,13 @@ func _physics_process(delta: float) -> void:
 			is_dashing = false
 			velocity = Vector3.ZERO
 			already_hit.clear()
+			melee_hitbox.monitoring = false  # Turn off when done
+
+	#else:
+	# Normal collision: ground + enemies
+		#collision_mask = (1 << 0) | (1 << 1)
 	
-		# Slide cooldown timer
+	# Slide cooldown timer
 	if slide_cooldown_timer > 0:
 		slide_cooldown_timer -= delta
 		slide_icon.modulate.a = 0.4
@@ -298,6 +297,7 @@ func _physics_process(delta: float) -> void:
 	var target_y = original_head_y * slide_camera_shrink if is_sliding else original_head_y
 	head.position.y = lerp(head.position.y, target_y, delta * 10)
 
+	collision_mask = (1 << 0) if is_dashing else ((1 << 0) | (1 << 1))
 	# Use velocity to actually move
 	move_and_slide()
 	

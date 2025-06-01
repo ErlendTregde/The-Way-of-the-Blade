@@ -216,6 +216,7 @@ _data = {
 size = Vector3(2.19577, 1, 1.41284)
 
 [node name="ProtoController" type="CharacterBody3D"]
+collision_mask = 3
 script = ExtResource("1_ucva2")
 dash_speed = 35.0
 dash_duration = 0.4
@@ -254,6 +255,8 @@ autoplay = "running"
 
 [node name="MeleeHitBox" type="Area3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0653811, -1.37723, -0.0763834)
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Camera3D/MeleeHitBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0379453, 0.890476, -1.17166)

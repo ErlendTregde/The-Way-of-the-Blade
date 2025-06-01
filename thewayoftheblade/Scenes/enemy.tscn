@@ -11,6 +11,7 @@ lightmap_size_hint = Vector2i(17, 14)
 material = ExtResource("2_hp1gi")
 
 [node name="Enemy" type="CharacterBody3D"]
+collision_layer = 2
 script = ExtResource("1_aqg13")
 enemy_material_default = ExtResource("2_hp1gi")
 enemy_material_hit = ExtResource("3_0lhys")
