@@ -10,3 +10,8 @@ func _on_main_pressed() -> void:
 
 func _on_deafult_map_pressed() -> void:
 	get_tree().change_scene_to_file("res://maps/DefaukMap.tscn")
+
+
+
+func _on_testmap_pressed() -> void:
+	get_tree().change_scene_to_file("res://maps/testmap.tscn")

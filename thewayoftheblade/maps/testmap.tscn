@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://bcgsoay3dwwql"]
+
+[ext_resource type="PackedScene" uid="uid://b3estgpg3stra" path="res://Scenes/timer_ui.tscn" id="1_7jtoi"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_u2l6s"]
+[ext_resource type="PackedScene" uid="uid://cwafujenjcu6f" path="res://Scenes/enemy.tscn" id="3_a5rbr"]
+[ext_resource type="PackedScene" uid="uid://boyvuqs8t37ov" path="res://Scenes/portal.tscn" id="4_ph2b1"]
+[ext_resource type="Script" uid="uid://bm6ruo4cce8xb" path="res://scripts/level_timer_starter.gd" id="5_0wlms"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qnas0"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_srud0"]
+sky_material = SubResource("ProceduralSkyMaterial_qnas0")
+
+[sub_resource type="Environment" id="Environment_hw600"]
+background_mode = 2
+sky = SubResource("Sky_srud0")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="testmap" type="Node3D"]
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+transform = Transform3D(0.984168, 0, 0, 0, 0.984168, 0, 0, 0, 0.984168, -16.0342, 11.1418, -22.4328)
+use_collision = true
+size = Vector3(4.49829, 24.7805, 4.74438)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(0.996018, 0, 0, 0, 0.996018, 0, 0, 0, 0.996018, -2.50962, 1.12534, -16.9819)
+use_collision = true
+size = Vector3(4.49829, 8.59967, 4.74438)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(0.992053, 0, 0, 0, 0.992053, 0, 0, 0, 0.992053, -4.17515, 10.1657, -25.8412)
+use_collision = true
+size = Vector3(4.49829, 20.4106, 4.74438)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(0.996018, 0, 0, 0, 0.996018, 0, 0, 0, 0.996018, 11.2902, 7.58912, -18.9227)
+use_collision = true
+size = Vector3(4.49829, 16.661, 4.74438)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.998007, 0, 0, 0, 0.998007, 0, 0, 0, 0.998007, -9.54855, 4.26074, -8.66342)
+use_collision = true
+size = Vector3(4.49829, 8.59967, 4.74438)
+
+[node name="TimerUi" parent="." instance=ExtResource("1_7jtoi")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hw600")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 6.63584, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.85154, -0.242732, -21.8144)
+use_collision = true
+size = Vector3(78.4015, 1, 98.2115)
+
+[node name="ProtoController" parent="." instance=ExtResource("2_u2l6s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31211, 0.25727, -1.53216)
+input_left = "move_left"
+input_right = "move_right"
+input_forward = "move_up"
+input_back = "move_down"
+input_jump = "jump"
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.47835, 5.26606, -8.40947)
+use_collision = true
+size = Vector3(3.0874, 13.5873, 2.13623)
+
+[node name="Enemy" parent="." instance=ExtResource("3_a5rbr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8029, 17.2541, -19.9797)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_a5rbr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98125, 22.2254, -26.7751)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_a5rbr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.65572, 9.9273, -8.90362)
+
+[node name="Enemy4" parent="." instance=ExtResource("3_a5rbr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.19709, 6.35749, -17.5671)
+
+[node name="Enemy5" parent="." instance=ExtResource("3_a5rbr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.30499, 13.4928, -8.50392)
+
+[node name="Portal" parent="." instance=ExtResource("4_ph2b1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.813, 23.2547, -22.3287)
+
+[node name="TimerStarter" type="Node3D" parent="."]
+script = ExtResource("5_0wlms")
